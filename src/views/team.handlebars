@@ -1,0 +1,12 @@
+<h1>Este es el equipo que conforma a la empresa</h1>
+
+<p>Nuestro equipo es el mejor!</p>
+
+{{team}}
+<ul>
+    {{#each team}}
+        <li>
+            <a href="/team/{{this.name}}">{{this.name}}</a>
+        </li>
+    {{/each}}
+</ul>
