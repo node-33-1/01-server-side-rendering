@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 require('dotenv').config();
 const router = require('./routes');
-const handlebars = require('express-handlebars'); 
+const handlebars = require('express-handlebars');
 
 // Esta es nuestra aplicación
 const app = express();
@@ -14,8 +14,16 @@ app.use(helmet({
     crossOriginResourcePolicy: false,
 }));
 app.use(cors());
-app.set('view engine', 'handlebars');   
-app.set("views", __dirname+"/views");
+app.use(
+    helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+            "img-src": ["'self'", "https: data:"]
+        }
+    })
+)
+app.set('view engine', 'handlebars');
+app.set("views", __dirname + "/views");
 app.engine('handlebars', handlebars.engine({
     layoutsDir: __dirname + '/views/layouts',
     defaultLayout: "index"
